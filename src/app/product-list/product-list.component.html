@@ -1,0 +1,56 @@
+<router-outlet></router-outlet>
+<h2>Product List</h2>
+
+<div class="d-flex align-items-center">
+  <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+  <button type="button" class="btn btn-secondary" (click)="openCreateDialog()" >Add Product</button>
+</div>
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Amount</th>
+      <th>Color</th>
+      <th>Brand</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td> {{product.id}} </td>
+      <td> {{product.name}} </td>
+      <td> {{product.price}} </td>
+      <td> {{product.amount}} </td>
+      <td> {{product.color}} </td>
+      <td> {{product.brand}} </td>
+      <td>
+        <button (click)="openEditDialog(product.id!)" class="btn btn-info">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="openDialog(product.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
+      <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
+    </li>
+
+    <li *ngFor="let pageNumber of [].constructor(totalPages); let i = index" class="page-item">
+      <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages - 1">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+

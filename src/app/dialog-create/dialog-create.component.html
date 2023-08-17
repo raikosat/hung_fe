@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{ data.message }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+    <div class="col-md-8 offset-md-3">
+      <div class="form-group">
+        <label>Product's Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" name="name">
+        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+          Product's Name is required
+        </div>
+      </div>
+      <!-- Các trường dữ liệu khác tương tự -->
+
+      <div class="form-group">
+        <label>Product's Price</label>
+        <input type="text" class="form-control" id="price" formControlName="price">
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+          Product's Price is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Product's Amount</label>
+        <input type="text" class="form-control" id="amount" formControlName="amount">
+        <div *ngIf="productForm.get('amount')?.invalid && productForm.get('amount')?.touched">
+          Product's Amount is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Product's Color</label>
+        <input type="text" class="form-control" id="color" formControlName="color">
+        <div *ngIf="productForm.get('color')?.invalid && productForm.get('color')?.touched">
+          Product's Color is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Product's Brand</label>
+        <input type="text" class="form-control" id="brand" formControlName="brand">
+        <div *ngIf="productForm.get('brand')?.invalid && productForm.get('brand')?.touched">
+          Product's Brand is required
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button mat-button [disabled]="productForm.invalid" mat-dialog-close (click)="onYesClick()">Confirm</button>
+</div>

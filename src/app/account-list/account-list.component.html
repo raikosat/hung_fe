@@ -1,0 +1,61 @@
+<router-outlet></router-outlet>
+<h2>Product List</h2>
+
+<div class="d-flex align-items-center">
+  <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+  <button type="button" class="btn btn-secondary" (click)="openCreateDialog()" >Add Account</button>
+</div>
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Phone number</th>
+      <th>Male/Female</th>
+      <th>Authorities</th>
+      <th>Status</th>
+      <th>Locked</th>
+      <th>Date of Birth</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td> {{account.id}} </td>
+      <td> {{account.username}} </td>
+      <td> {{account.phone}} </td>
+      <td> {{account.gender}} </td>
+      <td> {{account.authorities}} </td>
+      <td> {{account.isActive}} </td>
+      <td> {{account.isNotLocked}} </td>
+      <td> {{account.birthday}} </td>
+      <td> {{account.address}} </td>
+      <td>
+        <button (click)="openEditDialog(account.id!)" class="btn btn-info">Edit</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="openDialog(account.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
+      <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
+    </li>
+
+    <li *ngFor="let pageNumber of [].constructor(totalPages); let i = index" class="page-item">
+      <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages - 1">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
+
+
